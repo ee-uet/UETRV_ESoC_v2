@@ -1,5 +1,9 @@
 # Caravel user project includes
 -v $(USER_PROJECT_VERILOG)/rtl/user_project_wrapper.v	     
--v $(USER_PROJECT_VERILOG)/rtl/user_proj_example.v
+#-v $(USER_PROJECT_VERILOG)/rtl/user_proj_example.v
+-v $(USER_PROJECT_VERILOG)/rtl/SoC_Tile_for_backend.v
+-v $(USER_PROJECT_VERILOG)/rtl/mems.v
+-v $(USER_PROJECT_VERILOG)/rtl/sram_1KB_8.v
+-v $(USER_PROJECT_VERILOG)/rtl/sram_1KB_32.v
 
  

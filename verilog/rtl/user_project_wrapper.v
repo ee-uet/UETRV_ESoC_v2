@@ -82,40 +82,96 @@ module user_project_wrapper #(
 /* User project is instantiated  here   */
 /*--------------------------------------*/
 
-user_proj_example mprj (
-`ifdef USE_POWER_PINS
-	.vccd1(vccd1),	// User area 1 1.8V power
-	.vssd1(vssd1),	// User area 1 digital ground
-`endif
+SoC_Tile mprj (
+//`ifdef USE_POWER_PINS
+//	.VDD(vccd1),	// User area 1 1.8V power
+//	.VSS(vssd1),	// User area 1 digital ground
+//`endif
 
-    .wb_clk_i(wb_clk_i),
-    .wb_rst_i(wb_rst_i),
+    //.wb_clk_i(wb_clk_i),
+    //.wb_rst_i(wb_rst_i),
 
-    // MGMT SoC Wishbone Slave
+    //// MGMT SoC Wishbone Slave
 
-    .wbs_cyc_i(wbs_cyc_i),
-    .wbs_stb_i(wbs_stb_i),
-    .wbs_we_i(wbs_we_i),
-    .wbs_sel_i(wbs_sel_i),
-    .wbs_adr_i(wbs_adr_i),
-    .wbs_dat_i(wbs_dat_i),
-    .wbs_ack_o(wbs_ack_o),
-    .wbs_dat_o(wbs_dat_o),
+    //.wbs_cyc_i(wbs_cyc_i),
+    //.wbs_stb_i(wbs_stb_i),
+    //.wbs_we_i(wbs_we_i),
+    //.wbs_sel_i(wbs_sel_i),
+    //.wbs_adr_i(wbs_adr_i),
+    //.wbs_dat_i(wbs_dat_i),
+    //.wbs_ack_o(wbs_ack_o),
+    //.wbs_dat_o(wbs_dat_o),
 
-    // Logic Analyzer
+    //// Logic Analyzer
 
-    .la_data_in(la_data_in),
-    .la_data_out(la_data_out),
-    .la_oenb (la_oenb),
+    //.la_data_in(la_data_in),
+    //.la_data_out(la_data_out),
+    //.la_oenb (la_oenb),
 
     // IO Pads
 
-    .io_in (io_in),
-    .io_out(io_out),
-    .io_oeb(io_oeb),
+    //.io_in (io_in),
 
-    // IRQ
-    .irq(user_irq)
+    .user_clock         (user_clock2),
+    .wb_clock           (wb_clk_i),
+
+    //.io_out(io_out),
+
+    // GPIOs 0 thru 4 are unused because they are
+    // required for management core's SPI. When 
+    // changing pin assignments here, also update:
+    // 1) SoC_Tile verilog to provide reset to 
+    //      io_oeb for the outputs only,
+    // 2) par.tcl to place pins on appropriate side 
+    //      with appropriate spacing
+    // 3) user_defines.v
+    // 4) io_ports.c
+    // 5) io_ports_tb.v
+
+    .clock_sel          ( io_in[ 5]),
+    .clk_muxed          (io_out[ 6]),   // debug
+
+    .io_m1_io_qei_ch_a  ( io_in[ 7]),    
+    .io_m1_io_qei_ch_b  ( io_in[ 8]),    
+    .io_m1_io_pwm_high  (io_out[ 9]),
+    .io_m1_io_pwm_low   (io_out[10]),
+    .io_m1_io_x_homed   ( io_in[11]),    
+    .io_m1_io_y_homed   ( io_in[12]),    
+    .io_m1_io_step1dir  (io_out[13]), 
+    .io_m1_io_step2dir  (io_out[14]),
+    
+    .reset              ( io_in[15]),
+
+    .io_m2_io_qei_ch_a  ( io_in[16]),    
+    .io_m2_io_qei_ch_b  ( io_in[17]),    
+    .io_m2_io_pwm_high  (io_out[18]),
+    .io_m2_io_pwm_low   (io_out[19]),
+    .io_m2_io_x_homed   ( io_in[20]),    
+    .io_m2_io_y_homed   ( io_in[21]),    
+    .io_m2_io_step1dir  (io_out[22]), 
+    .io_m2_io_step2dir  (io_out[23]),
+
+    .io_spi_mosi        (io_out[24]),
+    .io_spi_clk         (io_out[25]),
+    .io_spi_cs          (io_out[26]),
+    .io_spi_miso        ( io_in[27]),
+
+    .io_uart_rx         ( io_in[28]),
+    .io_uart_tx         (io_out[29]),
+
+    .io_m3_io_qei_ch_a  ( io_in[30]),    
+    .io_m3_io_qei_ch_b  ( io_in[31]),    
+    .io_m3_io_pwm_high  (io_out[32]),
+    .io_m3_io_pwm_low   (io_out[33]),
+    .io_m3_io_x_homed   ( io_in[34]),    
+    .io_m3_io_y_homed   ( io_in[35]),    
+    .io_m3_io_step1dir  (io_out[36]), 
+    .io_m3_io_step2dir  (io_out[37]),
+
+    .io_oeb(io_oeb)
+
+    //// IRQ
+    //.irq(user_irq)
 );
 
 endmodule	// user_project_wrapper

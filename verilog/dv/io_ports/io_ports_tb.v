@@ -26,13 +26,78 @@ module io_ports_tb;
 
 	wire gpio;
 	wire [37:0] mprj_io;
-	wire [7:0] mprj_io_0;
 
-	assign mprj_io_0 = mprj_io[7:0];
-	// assign mprj_io_0 = {mprj_io[8:4],mprj_io[2:0]};
+    reg [31:0] loop_count, wdata;
+    reg [7:0]  bdata;
+    reg [31:0] buffer [0:511];  // buffer for SPI flash memory
+    reg [31:0] index, byte_no, bit_index;
 
-	assign mprj_io[3] = (CSB == 1'b1) ? 1'b1 : 1'bz;
-	// assign mprj_io[3] = 1'b1;
+    reg clock_sel;
+    reg my_reset;
+    reg homing_switch_x, homing_switch_y;
+
+    reg io_uart_tx; 
+    reg io_uart_rx; 
+
+    reg io_spi_cs, io_spi_clk, io_spi_mosi; 
+    reg io_spi_miso; 
+
+    reg io_dir_m1, io_dir_m2;
+    reg step1step, step2step;
+    reg pen_servo_control;
+
+    reg clk_muxed;
+
+    reg io_m1_io_qei_ch_a,
+        io_m1_io_qei_ch_b,
+        io_m2_io_qei_ch_a,
+        io_m2_io_qei_ch_b,
+        io_m3_io_qei_ch_a,
+        io_m3_io_qei_ch_b;
+
+    assign mprj_io[ 5] = clock_sel;
+    assign mprj_io[ 7] = 0; //io_m1_io_qei_ch_a;
+    assign mprj_io[ 8] = 0; //io_m1_io_qei_ch_b;
+    assign mprj_io[11] = 0; //io_m1_io_x_homed;
+    assign mprj_io[12] = 0; //io_m1_io_y_homed;
+    assign mprj_io[15] = my_reset;
+    assign mprj_io[16] = 0; //io_m2_io_qei_ch_a;
+    assign mprj_io[17] = 0; //io_m2_io_qei_ch_b;
+    assign mprj_io[20] = homing_switch_x; //io_m2_io_x_homed;
+    assign mprj_io[21] = homing_switch_y; //io_m2_io_y_homed;
+    assign mprj_io[27] = io_spi_miso;
+    assign mprj_io[28] = io_uart_rx;
+    assign mprj_io[30] = 0; //io_m3_io_qei_ch_a;
+    assign mprj_io[31] = 0; //io_m3_io_qei_ch_b;
+    assign mprj_io[34] = 0; //io_m3_io_x_homed;
+    assign mprj_io[35] = 0; //io_m3_io_y_homed;
+   
+    always@(*)
+    begin
+        clk_muxed         = mprj_io[ 6];
+        pen_servo_control = mprj_io[ 9]; 
+        step1step         = mprj_io[19]; 
+        io_dir_m1         = mprj_io[22]; 
+        io_dir_m2         = mprj_io[23]; 
+        io_spi_mosi       = mprj_io[24]; 
+        io_spi_clk        = mprj_io[25]; 
+        io_spi_cs         = mprj_io[26]; 
+        io_uart_tx        = mprj_io[29]; 
+        step2step         = mprj_io[33]; 
+
+        clock_sel = 1'b0;
+        io_uart_rx = io_uart_tx;    // loopback
+        homing_switch_x = 0;    // assume motors are homed
+        homing_switch_y = 0;    // assume motors are homed
+
+        //io_m1_io_qei_ch_a = 1'b0;
+        //io_m1_io_qei_ch_b = 1'b0;
+        //io_m2_io_qei_ch_a = 1'b0;
+        //io_m2_io_qei_ch_b = 1'b0;
+        //io_m3_io_qei_ch_a = 1'b0;
+        //io_m3_io_qei_ch_b = 1'b0;
+    end
+    
 
 	// External clock is used by default.  Make this artificially fast for the
 	// simulation.  Normally this would be a slow clock and the digital PLL
@@ -137,50 +202,114 @@ module io_ports_tb;
 			$sdf_annotate("../../../caravel/sdf/gpio_defaults_block.sdf", uut.gpio_defaults_block_35) ;
 			$sdf_annotate("../../../caravel/sdf/gpio_defaults_block.sdf", uut.gpio_defaults_block_36) ;
 			$sdf_annotate("../../../caravel/sdf/gpio_defaults_block.sdf", uut.gpio_defaults_block_37) ;
+//        $sdf_annotate("../../synthesis/riscv_delays.sdf", RISCVCPU_tb.my_cpu,,"sdf.log","MAXIMUM");
 		end
 	`endif 
+
+    wire [31:0] loop_count_divided;
+    assign loop_count_divided = loop_count >> 10;
+
+    always@(index or loop_count_divided)
+    begin
+        $display("Time: %d\t index: %d \t loop_count = %d", $time, index, loop_count);
+    end
+
+    //always@(*)  $display("First few bytes of memory:\n io_ports_tb.uut.mprj.mprj.wb_inter_connect.imem.imem.imem.imem_ext.mem_0_0.mem[0] = %h \n\n", io_ports_tb.uut.mprj.mprj.wb_inter_connect.imem.imem.imem.imem_ext.mem_0_0.mem[0]);  // debug
 
 	initial begin
 		$dumpfile("io_ports.vcd");
 		$dumpvars(0, io_ports_tb);
+        //$dumpvars(1, io_ports_tb.uut.mprj.mprj.clk_muxed, SoC_tb.index, io_ports_tb.uut.mprj.mprj.wb_inter_connect.uart.tx_data_r, SoC_tb.io_dir_m1, SoC_tb.io_dir_m2, SoC_tb.pen_servo_control, SoC_tb.step1step, SoC_tb.step2step);
+        //$monitor("Time: %d\t index: %d \t loop_count_divided = %d", $time, index, loop_count_divided);
 
-		// Repeat cycles of 1000 clock edges as needed to complete testbench
-		repeat (25) begin
-			repeat (1000) @(posedge clock);
-			// $display("+1000 cycles");
-		end
-		$display("%c[1;31m",27);
-		`ifdef GL
-			$display ("Monitor: Timeout, Test Mega-Project IO Ports (GL) Failed");
-		`else
-			$display ("Monitor: Timeout, Test Mega-Project IO Ports (RTL) Failed");
-		`endif
-		$display("%c[0m",27);
-		$finish;
+        my_reset = 1;
+
+        //#2100;  // since reset is released at #2000
+        #1_000_000;  
+
+        my_reset = 0;
+        
+        $readmemh("imem.txt", buffer);
+
+        index = 0;
+        
+        io_spi_miso = 0;
+    
+        //for (loop_count = 0; loop_count < 300000; loop_count = loop_count + 1)
+        for (loop_count = 0; loop_count < 300000; loop_count = loop_count + 1)
+        begin
+            //$display("Loop count = %d\n", loop_count);
+            @ (posedge clock);
+    
+            // transmit the instruction memory contents byte by byte over SPI
+        	if (io_spi_mosi == 1)
+            begin
+        	    wdata = buffer[index];
+        	    index = index + 1;  // increment byte index
+
+                //if (index == 2) $finish;    // debug
+
+        	    repeat (431) @ (posedge clock);
+        	    for (byte_no = 0; byte_no < 4; byte_no = byte_no + 1) 
+                begin
+                    case (byte_no)
+                        0:  bdata = wdata[7:0];
+                        1:  bdata = wdata[15:8];
+                        2:  bdata = wdata[23:16];
+                        3:  bdata = wdata[31:24];
+                    endcase
+        	        repeat (68) @ (posedge clock);
+                    // transmit the selected byte bit by bit over SPI
+                    for (bit_index = 0; bit_index < 8; bit_index = bit_index + 1) 
+                    begin
+                        io_spi_miso = bdata[7 - bit_index];
+                        repeat (8) @ (posedge clock);
+                    end
+                    @ (posedge clock);
+                    io_spi_miso = 0;
+        	    end
+            end
+        end
+        
+        $display("%c[1;31m",27);
+        $display("Testbench failed.");
+//		`ifdef GL
+//			$display ("Monitor: Timeout, Test Mega-Project IO Ports (GL) Failed");
+//		`else
+//			$display ("Monitor: Timeout, Test Mega-Project IO Ports (RTL) Failed");
+//		`endif
+        $display("%c[0m",27);
+        $finish; 
 	end
 
-	initial begin
-	    // Observe Output pins [7:0]
-		wait(mprj_io_0 == 8'h01);
-		wait(mprj_io_0 == 8'h02);
-		wait(mprj_io_0 == 8'h03);
-		wait(mprj_io_0 == 8'h04);
-		wait(mprj_io_0 == 8'h05);
-		wait(mprj_io_0 == 8'h06);
-		wait(mprj_io_0 == 8'h07);
-		wait(mprj_io_0 == 8'h08);
-		wait(mprj_io_0 == 8'h09);
-		wait(mprj_io_0 == 8'h0A);   
-		wait(mprj_io_0 == 8'hFF);
-		wait(mprj_io_0 == 8'h00);
-		
-		`ifdef GL
-	    	$display("Monitor: Test 1 Mega-Project IO (GL) Passed");
-		`else
-		    $display("Monitor: Test 1 Mega-Project IO (RTL) Passed");
-		`endif
-	    $finish;
-	end
+    initial        // logic has been verified through practical demonstration using FPGA, hence this testbench is only checking connections by applying inputs and observing that the outputs are toggling as a result of the inputs
+    begin
+        wait(io_ports_tb.uut.mprj.mprj.wb_inter_connect.uart.tx_data_r == 8'd0);   // wait till program transmits the coordinates (0, 0)
+        repeat(2)       // wait for 2 pulses of pen_servo_control output
+        begin
+            @ (posedge pen_servo_control);
+            @ (negedge pen_servo_control);
+        end
+        wait(io_ports_tb.uut.mprj.mprj.wb_inter_connect.uart.tx_data_r == 8'd100);         // wait for d i.e. the down command
+        @ (posedge io_dir_m2);          // current coordinates are (0, 0) so no movement occurs i.e. no step pulses to motors; just check for change of direction output
+        wait(io_ports_tb.uut.mprj.mprj.wb_inter_connect.uart.tx_data_r == 8'd108);         // wait for l i.e. the left command
+        wait(step1step == 1'b0);
+        wait(step2step == 1'b0);
+        @ (negedge io_dir_m1);
+        wait(step1step == 1'b1);
+        wait(step2step == 1'b1);
+        @ (negedge step1step);
+        wait(step2step == 1'b0);
+        #500000
+        
+        $display("Testbench passed.");
+//		`ifdef GL
+//	    	$display("Monitor: Test 1 Mega-Project IO (GL) Passed");
+//		`else
+//		    $display("Monitor: Test 1 Mega-Project IO (RTL) Passed");
+//		`endif
+        $finish;
+    end
 
 	initial begin
 		RSTB <= 1'b0;
@@ -206,9 +335,9 @@ module io_ports_tb;
 		power4 <= 1'b1;
 	end
 
-	always @(mprj_io) begin
-		#1 $display("MPRJ-IO state = %b ", mprj_io[7:0]);
-	end
+//	always @(mprj_io) begin
+//		#1 $display("MPRJ-IO state = %b ", mprj_io[7:0]);
+//	end
 
 	wire flash_csb;
 	wire flash_clk;
