@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.61 (w)1999-2014 BSI
-[*] Tue Nov 22 10:24:09 2022
+[*] Wed Nov 23 21:03:10 2022
 [*]
-[dumpfile] "/home/uetlhr/Documents/SermoPlot_backend/draft_SRAM_blackbox/UETRV_ESoC_mpw8/verilog/dv/io_ports/RTL-io_ports.vcd"
-[dumpfile_mtime] "Tue Nov 22 10:07:24 2022"
-[dumpfile_size] 191405947
-[savefile] "/home/uetlhr/Documents/SermoPlot_backend/draft_SRAM_blackbox/UETRV_ESoC_mpw8/verilog/dv/io_ports/gtkwave_config.gtkw"
-[timestart] 742700000
-[size] 1874 463
+[dumpfile] "/home/uetlhr/Documents/SermoPlot_backend/draft_SRAM_blackbox/UETRV_ESoC_v2/verilog/dv/io_ports/RTL-io_ports.vcd"
+[dumpfile_mtime] "Wed Nov 23 21:00:59 2022"
+[dumpfile_size] 1632239
+[savefile] "/home/uetlhr/Documents/SermoPlot_backend/draft_SRAM_blackbox/UETRV_ESoC_v2/verilog/dv/io_ports/gtkwave_config.sav"
+[timestart] 0
+[size] 1280 954
 [pos] 16 3
-*-25.000000 831562500 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-29.000000 831562500 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] io_ports_tb.
 [treeopen] io_ports_tb.uut.
 [treeopen] io_ports_tb.uut.mprj.
@@ -25,67 +25,13 @@
 [sst_width] 412
 [signals_width] 239
 [sst_expanded] 1
-[sst_vpaned_height] 91
+[sst_vpaned_height] 409
 @22
 io_ports_tb.index[31:0]
 @28
 io_ports_tb.io_spi_mosi
-@22
-io_ports_tb.uut.mprj.mprj.wb_inter_connect.dmem.dmem_io_dmem_addr[11:0]
-io_ports_tb.uut.mprj.mprj.wb_inter_connect.dmem.dmem_io_dmem_wdata[31:0]
-io_ports_tb.uut.mprj.mprj.wb_inter_connect.dmem.dmem_io_dmem_rdata[31:0]
-@28
-io_ports_tb.uut.mprj.mprj.wb_inter_connect.dmem.dmem_io_wr_en
-@c00022
-io_ports_tb.uut.mprj_io[37:0]
-@28
-(0)io_ports_tb.uut.mprj_io[37:0]
-(1)io_ports_tb.uut.mprj_io[37:0]
-(2)io_ports_tb.uut.mprj_io[37:0]
-(3)io_ports_tb.uut.mprj_io[37:0]
-(4)io_ports_tb.uut.mprj_io[37:0]
-(5)io_ports_tb.uut.mprj_io[37:0]
-(6)io_ports_tb.uut.mprj_io[37:0]
-(7)io_ports_tb.uut.mprj_io[37:0]
-(8)io_ports_tb.uut.mprj_io[37:0]
-(9)io_ports_tb.uut.mprj_io[37:0]
-(10)io_ports_tb.uut.mprj_io[37:0]
-(11)io_ports_tb.uut.mprj_io[37:0]
-(12)io_ports_tb.uut.mprj_io[37:0]
-(13)io_ports_tb.uut.mprj_io[37:0]
-(14)io_ports_tb.uut.mprj_io[37:0]
-(15)io_ports_tb.uut.mprj_io[37:0]
-(16)io_ports_tb.uut.mprj_io[37:0]
-(17)io_ports_tb.uut.mprj_io[37:0]
-(18)io_ports_tb.uut.mprj_io[37:0]
-(19)io_ports_tb.uut.mprj_io[37:0]
-(20)io_ports_tb.uut.mprj_io[37:0]
-(21)io_ports_tb.uut.mprj_io[37:0]
-(22)io_ports_tb.uut.mprj_io[37:0]
-(23)io_ports_tb.uut.mprj_io[37:0]
-(24)io_ports_tb.uut.mprj_io[37:0]
-(25)io_ports_tb.uut.mprj_io[37:0]
-(26)io_ports_tb.uut.mprj_io[37:0]
-(27)io_ports_tb.uut.mprj_io[37:0]
-(28)io_ports_tb.uut.mprj_io[37:0]
-(29)io_ports_tb.uut.mprj_io[37:0]
-(30)io_ports_tb.uut.mprj_io[37:0]
-(31)io_ports_tb.uut.mprj_io[37:0]
-(32)io_ports_tb.uut.mprj_io[37:0]
-(33)io_ports_tb.uut.mprj_io[37:0]
-(34)io_ports_tb.uut.mprj_io[37:0]
-(35)io_ports_tb.uut.mprj_io[37:0]
-(36)io_ports_tb.uut.mprj_io[37:0]
-(37)io_ports_tb.uut.mprj_io[37:0]
-@1401200
--group_end
-@22
-io_ports_tb.uut.mprj.mprj.core.dpath.pc[31:0]
-io_ports_tb.uut.mprj.mprj.core.dpath.fet_exe_inst[31:0]
-@28
-io_ports_tb.io_spi_miso
-io_ports_tb.io_spi_mosi
-@29
 io_ports_tb.uut.mprj.mprj.io_spi_mosi
+io_ports_tb.clk_muxed
+io_ports_tb.my_reset
 [pattern_trace] 1
 [pattern_trace] 0

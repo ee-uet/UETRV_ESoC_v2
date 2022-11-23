@@ -222,20 +222,21 @@ module io_ports_tb;
         //$dumpvars(1, io_ports_tb.uut.mprj.mprj.clk_muxed, SoC_tb.index, io_ports_tb.uut.mprj.mprj.wb_inter_connect.uart.tx_data_r, SoC_tb.io_dir_m1, SoC_tb.io_dir_m2, SoC_tb.pen_servo_control, SoC_tb.step1step, SoC_tb.step2step);
         //$monitor("Time: %d\t index: %d \t loop_count_divided = %d", $time, index, loop_count_divided);
 
+        $display("Starting reset sequence...");
         my_reset = 1;
-
-        //#2100;  // since reset is released at #2000
-        #1_000_000;  
-
+        #2000;
+        my_reset = 0;
+        wait(clk_muxed === 1'b1);  // wait for management core to finish configuration of the GPIOs that are to be used as outputs
+        #2000;
+        my_reset = 1;   // apply reset again
+        #2000;
         my_reset = 0;
         
+        $display("Starting loading of program over SPI...");
         $readmemh("imem.txt", buffer);
-
         index = 0;
-        
         io_spi_miso = 0;
     
-        //for (loop_count = 0; loop_count < 300000; loop_count = loop_count + 1)
         for (loop_count = 0; loop_count < 300000; loop_count = loop_count + 1)
         begin
             //$display("Loop count = %d\n", loop_count);
