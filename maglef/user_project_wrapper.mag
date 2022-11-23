@@ -1,7 +1,7 @@
 magic
 tech sky130A
 magscale 1 2
-timestamp 1669211916
+timestamp 1669227272
 << obsli1 >>
 rect 100000 100000 500016 500016
 << obsm1 >>
@@ -3893,7 +3893,7 @@ string FIXED_BBOX 0 0 584000 704000
 string LEFclass BLOCK
 string LEFview TRUE
 string GDS_END 97750212
-string GDS_FILE /home/uetlhr/Documents/SermoPlot_backend/draft_SRAM_blackbox/UETRV_ESoC_mpw8/openlane/user_project_wrapper/runs/22_11_23_18_52/results/signoff/user_project_wrapper.magic.gds
+string GDS_FILE /home/uetlhr/Documents/SermoPlot_backend/draft_SRAM_blackbox/UETRV_ESoC_v2/openlane/user_project_wrapper/runs/22_11_23_23_07/results/signoff/user_project_wrapper.magic.gds
 string GDS_START 96568514
 << end >>
 
