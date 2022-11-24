@@ -4,6 +4,6 @@
 */*/tmp
 *.hex*
 *.lst
+*.swp
 *.vcd
 *.gtkw
-*.swp
