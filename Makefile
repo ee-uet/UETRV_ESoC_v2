@@ -330,3 +330,5 @@ my_rtl_sim:
 gtk_rtl_sim:    my_rtl_sim
 	gtkwave verilog/dv/io_ports/gtkwave_config.sav
 
+my_user_project_wrapper:	user_project_wrapper
+	gzip -9 gds/user_project_wrapper.gds
