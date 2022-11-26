@@ -1,5 +1,5 @@
 ## UETRV_ESoC_v2
-UETRV_ECORE_v2 is a RISC-V based SoC derived from [UETRV_ESoC](https://github.com/ee-uet/UETRV_ESoC) with a few changes; it has been passed through the Cadence VLSI flow for submission to Google and Efabless' Open-MPW-8 shuttle program using Skywater's open-source 130 nm PDK. The verilog RTL used in this repo is generated from Scala source, available [here](https://github.com/ee-uet/UETRV_ESoC). Further details about the peripheral memory map, bootloader, example programs, testbenches etc. are also provided in that repo.
+UETRV_ECORE_v2 is a RISC-V based SoC derived from [UETRV_ESoC](https://github.com/ee-uet/UETRV_ESoC) with a few changes; it has been passed through the Cadence VLSI flow for submission to Google and Efabless' Open MPW-8 shuttle program using Skywater's open-source 130 nm PDK. The verilog RTL used in this repo is generated from Scala source, available [here](https://github.com/ee-uet/UETRV_ESoC). Further details about the peripheral memory map, bootloader, example programs, testbenches etc. are also provided in that repo.
 
 ## Updates from UETRV_ESoC
 The following are the differences between UETRV_ESoC_v2 and UETRV_ESoC:
