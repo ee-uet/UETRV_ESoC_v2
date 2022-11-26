@@ -6,14 +6,3 @@ The following are the differences between UETRV-ESoC-v2 and UETRV-ESoC:
 * Fixed width of address bus in the instruction bus. Previously, the address bus was 2 bits narrower than required for the size specified in the config.scala file.
 * Fixed selection of the motor control module to be accessed using specified address. Previously, although three motor control modules were instantiated, only the first motor module was accessible.
 * Added 2 inputs and 2 outputs to the motor control module, to aid in controlling stepper motors for a plotter's operation. The 2 inputs have been used to read the state of homing switches, and the 2 outputs have been used to provide the direction inputs to the stepper motor driver, but this usage of the IOs been done using firmware, thus they can be easily used for other purposes by modifying the firmware written in C language.
-
-
-A Heading
-=========
-
-* A bullet
-- Another bullet
-
-A link to a file in my repo: [io_ports_tb.v](verilog/dv/io_ports/io_ports_tb.v)
-
-
