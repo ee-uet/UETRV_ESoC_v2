@@ -10,4 +10,4 @@ The following are the differences between UETRV_ESoC_v2 and UETRV_ESoC:
 * Added 2 inputs and 2 outputs to the motor control module, to aid in controlling stepper motors for a plotter's operation. The 2 inputs have been used to read the state of homing switches, and the 2 outputs have been used to provide the direction inputs to the stepper motor driver, but this usage of the IOs been done using firmware, thus they can be easily used for other purposes by modifying the firmware written in C language.
 * Increased instruction memory size to 8 KB and data memory size to 4 KB. As shown in the image below, the 4 lower SRAMs constitute the instruction memory and the 2 upper SRAMs constitute the data memory.
 
-<img src="docs/full_chip_layout.png" alt="layout rendered using klayout" width="1000"/>
+<img src="docs/full_chip_layout.png" alt="layout rendered using klayout" width="500"/>
