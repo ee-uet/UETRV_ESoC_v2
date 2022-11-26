@@ -16,13 +16,13 @@ The following are the differences between UETRV_ESoC_v2 and UETRV_ESoC:
 
 ## Testbench
 
-The io_ports testbench provided in the caravel_user_project template configures and tests GPIOs' functionality. It has been merged with UETRV_ESoC's testbench ([old_tb](https://github.com/ee-uet/UETRV_ESoC/blob/main/tb/SoC_tb.v)), resulting in [io_ports_tb.v](verilog/dv/io_ports/io_ports_tb.v). This testbench runs full chip simulation by configuring the GPIOs using firmware for caravel's management SoC, then it loads a program into UETRV_ESoC_v2 over GPIOs configured for SPI, then a sample firmware program transmits characters over UART. These characters are fed back to UETRV_ESoC_v2 by UART loopback. Some of these characters are commands for moving a plotter's pen as described below:
+The io_ports testbench provided in the caravel_user_project template configures and tests GPIOs' functionality. It has been merged with UETRV_ESoC's testbench ([old_tb](https://github.com/ee-uet/UETRV_ESoC/blob/main/tb/SoC_tb.v)), resulting in [io_ports_tb.v](verilog/dv/io_ports/io_ports_tb.v). This testbench runs full chip simulation by configuring the GPIOs using firmware for caravel's management SoC. Following this, reset is applied which causes UETRV_ESoC_v2 to run its bootloader. The testbench mimics an SPI-based flash memory and loads a firmware into UETRV_ESoC_v2's instruction memory over GPIOs configured for SPI, in conjunction with the bootloader. Once loading of firmware is finished, the bootloader hands control over to the firmware. The firmware program transmits characters over UART, which are fed back to UETRV_ESoC_v2 by UART loopback. Some of these characters are commands for moving a plotter's pen as described below:
 
 - 'u' to move pen up in 2D-grid
-- 'd' for down
-- 'l' for left
-- 'r' for right
+- 'd' to move pen down in 2D-grid
+- 'l' to move pen left in 2D-grid
+- 'r' to move pen right in 2D-grid
 - 'L' for lifting the pen
 - 'D' for dropping the pen
 
-The testbench waits for each command to occur and verifies that the step and direction outputs for stepper motors, and the PWM output for the servo motor lifting and dropping the pen, have changed properly.
+The testbench waits for each command to occur and verifies that the step and direction outputs for two stepper motors, and the PWM output for the servo motor lifting and dropping the pen, have changed properly.
