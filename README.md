@@ -1,7 +1,7 @@
-## UETRV-ESoC-v2
-UETRV-ECORE-v2 is a RISC-V based SoC derived from [UETRV_ESoC](https://github.com/ee-uet/UETRV_ESoC) with a few bug-fixes and increased memory sizes; it has been passed through the Cadence VLSI flow for submission to Google and Efabless' Open-MPW-8 shuttle using Skywater's 130 nm PDK. The verilog rtl used in this repo is generated from Scala source, available [here](https://github.com/ee-uet/UETRV_ESoC). Further details about the peripheral memory map, bootloader, example programs, testbenches etc. are also provided in that repo.
+## UETRV_ESoC_v2
+UETRV_ECORE_v2 is a RISC-V based SoC derived from [UETRV_ESoC](https://github.com/ee-uet/UETRV_ESoC) with a few bug-fixes and increased memory sizes; it has been passed through the Cadence VLSI flow for submission to Google and Efabless' Open-MPW-8 shuttle using Skywater's 130 nm PDK. The verilog rtl used in this repo is generated from Scala source, available [here](https://github.com/ee-uet/UETRV_ESoC). Further details about the peripheral memory map, bootloader, example programs, testbenches etc. are also provided in that repo.
 
-The following are the differences between UETRV-ESoC-v2 and UETRV-ESoC:
+The following are the differences between UETRV_ESoC_v2 and UETRV_ESoC:
 
 * Fixed width of address bus in the instruction bus. Previously, the address bus was 2 bits narrower than required for the size specified in the config.scala file.
 * Fixed selection of the motor control module to be accessed using specified address. Previously, although three motor control modules were instantiated, only the first motor module was accessible.
