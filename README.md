@@ -25,4 +25,4 @@ The io_ports testbench provided in the caravel_user_project template configures 
 - 'L' for lifting the pen
 - 'D' for dropping the pen
 
-The testbench waits for each command to occur and verifies that the step and direction outputs for two stepper motors, and the PWM output for the servo motor lifting and dropping the pen, have changed properly. Practical demonstration of a plotter's operation controlled by UETRV_ESoC_v2, programmed to an FPGA, can be found [here[(https://drive.google.com/file/d/1raqXAQvwz1TRjg51NF_Drprh9RkbB_k1/view?usp=sharing).
+The testbench waits for each command to occur and verifies that the step and direction outputs for two stepper motors, and the PWM output for the servo motor lifting and dropping the pen, have changed properly. Practical demonstration of a plotter's operation controlled by UETRV_ESoC_v2, programmed to an FPGA, can be found [here](https://drive.google.com/file/d/1raqXAQvwz1TRjg51NF_Drprh9RkbB_k1/view?usp=sharing).
