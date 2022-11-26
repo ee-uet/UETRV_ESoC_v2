@@ -11,7 +11,7 @@ The following are the differences between UETRV_ESoC_v2 and UETRV_ESoC:
 * Increased instruction memory size to 8 KB and data memory size to 4 KB. As shown in the image below, the 4 lower SRAMs constitute the instruction memory and the 2 upper SRAMs constitute the data memory.
 
 <p align="center">
-  <img src="docs/full_chip_layout.png" alt="layout rendered using klayout" width="300"/>
+  <img src="docs/full_chip_layout.png" alt="layout rendered using klayout" width="400"/>
 </p>
 
 ## Testbench
