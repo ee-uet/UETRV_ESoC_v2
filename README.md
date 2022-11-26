@@ -4,7 +4,7 @@ UETRV_ECORE_v2 is a RISC-V based SoC derived from [UETRV_ESoC](https://github.co
 ## Video Demo
 Practical demonstration of a plotter's operation controlled by UETRV_ESoC_v2, programmed to an FPGA, can be viewed [in this video](https://drive.google.com/file/d/1raqXAQvwz1TRjg51NF_Drprh9RkbB_k1/view?usp=sharing).
 
-## Updates from UETRV_ESoC
+## Updates from [UETRV_ESoC](https://github.com/ee-uet/UETRV_ESoC)
 The following are the differences between UETRV_ESoC_v2 and UETRV_ESoC:
 
 * Fixed width of address bus in the instruction bus. Previously, the address bus was 2 bits narrower than required for the instruction memory size specified in the config.scala file.
