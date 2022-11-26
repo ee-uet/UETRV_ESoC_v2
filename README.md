@@ -1,6 +1,9 @@
 ## UETRV_ESoC_v2
 UETRV_ECORE_v2 is a RISC-V based SoC derived from [UETRV_ESoC](https://github.com/ee-uet/UETRV_ESoC) with a few changes. UETRV_ESoC_v2 has been passed through the Cadence VLSI flow for submission to Google and Efabless' Open MPW-8 shuttle program using Skywater's open-source 130 nm PDK (the project can be found on Efabless' website [here](https://platform.efabless.com/projects/1549)). The verilog RTL used in this repo is generated from Scala source, available [here](https://github.com/ee-uet/UETRV_ESoC). Further details about the peripheral memory map, bootloader, example programs, testbenches etc. are also provided in that repo.
 
+## Video Demo
+Practical demonstration of a plotter's operation controlled by UETRV_ESoC_v2, programmed to an FPGA, can be viewed [in this video](https://drive.google.com/file/d/1raqXAQvwz1TRjg51NF_Drprh9RkbB_k1/view?usp=sharing).
+
 ## Updates from UETRV_ESoC
 The following are the differences between UETRV_ESoC_v2 and UETRV_ESoC:
 
@@ -26,6 +29,3 @@ The io_ports testbench provided in the caravel_user_project template configures 
 - 'D' for dropping the pen
 
 The testbench waits for each command to occur and verifies that the step and direction outputs for two stepper motors moving the pen in the 2D-grid, and the PWM output for the servo motor lifting and dropping the pen, have changed properly.
-
-## Video Demo
-Practical demonstration of a plotter's operation controlled by UETRV_ESoC_v2, programmed to an FPGA, can be viewed [in this video](https://drive.google.com/file/d/1raqXAQvwz1TRjg51NF_Drprh9RkbB_k1/view?usp=sharing).
