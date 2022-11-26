@@ -16,7 +16,7 @@ The following are the differences between UETRV_ESoC_v2 and UETRV_ESoC:
 
 ## Testbench
 
-The io_ports testbench provided in the caravel_user_project template configures and tests GPIOs' functionality. It has been merged with UETRV_ESoC's testbench ([old_tb](https://github.com/ee-uet/UETRV_ESoC/blob/main/tb/SoC_tb.v)), resulting in [io_ports_tb.v](verilog/dv/io_ports_tb.v). This testbench runs full chip simulation by configuring the GPIOs using firmware for caravel's management SoC, then it loads a program into UETRV_ESoC_v2 over GPIOs configured for SPI, then a sample firmware program transmits characters over UART. These characters are fed back to UETRV_ESoC_v2 by UART loopback. Some of these characters are commands for moving a plotter's pen as described below:
+The io_ports testbench provided in the caravel_user_project template configures and tests GPIOs' functionality. It has been merged with UETRV_ESoC's testbench ([old_tb](https://github.com/ee-uet/UETRV_ESoC/blob/main/tb/SoC_tb.v)), resulting in [io_ports_tb.v](verilog/dv/io_ports/io_ports_tb.v). This testbench runs full chip simulation by configuring the GPIOs using firmware for caravel's management SoC, then it loads a program into UETRV_ESoC_v2 over GPIOs configured for SPI, then a sample firmware program transmits characters over UART. These characters are fed back to UETRV_ESoC_v2 by UART loopback. Some of these characters are commands for moving a plotter's pen as described below:
 
 - 'u' to move pen up in 2D-grid
 - 'd' for down
