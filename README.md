@@ -4,5 +4,5 @@ UETRV_ECORE_v2 is a RISC-V based SoC derived from [UETRV_ESoC](https://github.co
 The following are the differences between UETRV_ESoC_v2 and UETRV_ESoC:
 
 * Fixed width of address bus in the instruction bus. Previously, the address bus was 2 bits narrower than required for the instruction memory size specified in the config.scala file.
-* Fixed selection of the motor control module to be accessed using specified address. Previously, although three motor control modules were instantiated, only the first motor module was accessible.
+* Fixed selection of the motor control module to be accessed using the address given to data bus. Previously, although three motor control modules were instantiated, only the first motor module was accessible.
 * Added 2 inputs and 2 outputs to the motor control module, to aid in controlling stepper motors for a plotter's operation. The 2 inputs have been used to read the state of homing switches, and the 2 outputs have been used to provide the direction inputs to the stepper motor driver, but this usage of the IOs been done using firmware, thus they can be easily used for other purposes by modifying the firmware written in C language.
