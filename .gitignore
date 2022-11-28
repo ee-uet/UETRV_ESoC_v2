@@ -8,5 +8,3 @@
 *.vcd
 *.gtkw
 *.vcd.hier
-verilog/dv/io_ports/io_ports.elf
-verilog/dv/io_ports/io_ports.vvp
