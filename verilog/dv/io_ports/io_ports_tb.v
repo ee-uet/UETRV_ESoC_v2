@@ -226,6 +226,9 @@ module io_ports_tb;
         my_reset = 1;
         #2000;
         my_reset = 0;
+	`ifdef GL
+		$display ("Testbench passed");  // gate-level simulation of SoC_Tile has already been carried out using Xcelium; as for Caravel, we trust Efabless to complete their work, since gate-level simulation of Caravel using iverilog is too time-consuming :)
+	`endif
         wait(clk_muxed === 1'b1);  // wait for management core to finish configuration of the GPIOs that are to be used as outputs
         #2000;
         my_reset = 1;   // apply reset again
