@@ -34,7 +34,7 @@ ifeq ($(PDK),sky130A)
 	SKYWATER_COMMIT=f70d8ca46961ff92719d8870a18a076370b85f6c
 	export OPEN_PDKS_COMMIT?=0059588eebfc704681dc2368bd1d33d96281d10f
 	export OPENLANE_TAG?=2022.11.19
-	MPW_TAG ?= mpw-8a
+	MPW_TAG ?= mpw-8c
 
 ifeq ($(CARAVEL_LITE),1)
 	CARAVEL_NAME := caravel-lite
@@ -52,7 +52,7 @@ ifeq ($(PDK),sky130B)
 	SKYWATER_COMMIT=f70d8ca46961ff92719d8870a18a076370b85f6c
 	export OPEN_PDKS_COMMIT?=0059588eebfc704681dc2368bd1d33d96281d10f
 	export OPENLANE_TAG?=2022.11.19
-	MPW_TAG ?= mpw-8a
+	MPW_TAG ?= mpw-8c
 
 ifeq ($(CARAVEL_LITE),1)
 	CARAVEL_NAME := caravel-lite
@@ -68,7 +68,7 @@ endif
 
 ifeq ($(PDK),gf180mcuC)
 
-	MPW_TAG ?= gfmpw-0a
+	MPW_TAG ?= gfmpw-0b
 	CARAVEL_NAME := caravel
 	CARAVEL_REPO := https://github.com/efabless/caravel-gf180mcu
 	CARAVEL_TAG := $(MPW_TAG)
@@ -329,4 +329,8 @@ my_rtl_sim:
 
 gtk_rtl_sim:    my_rtl_sim
 	gtkwave verilog/dv/io_ports/gtkwave_config.sav
+
+my_user_project_wrapper:	user_project_wrapper
+	rm -rf gds/user_project_wrapper.gds.gz
+	gzip gds/user_project_wrapper.gds
 

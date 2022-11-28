@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/uetlhr/Documents/SermoPlot_backend/draft_SRAM_blackbox/UETRV_ESoC_mpw8/venv"
+VIRTUAL_ENV="/home/uetlhr/Documents/SermoPlot_backend/draft_SRAM_blackbox/UETRV_ESoC_v2/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
