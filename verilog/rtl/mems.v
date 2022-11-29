@@ -150,7 +150,7 @@ end // initial
 `endif // SYNTHESIS
 endmodule
 module imem_ext(
-  input  [10:0] RW0_addr,
+  input  [9:0]  RW0_addr,
   input         RW0_clk,
   input  [31:0] RW0_wdata,
   output [31:0] RW0_rdata,
@@ -180,52 +180,18 @@ module imem_ext(
   wire  mem_1_0_clk1;
   wire  mem_1_0_csb1;
   wire [8:0] mem_1_0_addr1;
-  wire [8:0] mem_2_0_addr0;
-  wire  mem_2_0_clk0;
-  wire [31:0] mem_2_0_din0;
-  wire [31:0] mem_2_0_dout0;
-  wire  mem_2_0_csb0;
-  wire  mem_2_0_web0;
-  wire [3:0] mem_2_0_wmask0;
-  wire  mem_2_0_clk1;
-  wire  mem_2_0_csb1;
-  wire [8:0] mem_2_0_addr1;
-  wire [8:0] mem_3_0_addr0;
-  wire  mem_3_0_clk0;
-  wire [31:0] mem_3_0_din0;
-  wire [31:0] mem_3_0_dout0;
-  wire  mem_3_0_csb0;
-  wire  mem_3_0_web0;
-  wire [3:0] mem_3_0_wmask0;
-  wire  mem_3_0_clk1;
-  wire  mem_3_0_csb1;
-  wire [8:0] mem_3_0_addr1;
-  wire [1:0] RW0_addr_sel = RW0_addr[10:9];
-  reg [1:0] RW0_addr_sel_reg;
+  wire  RW0_addr_sel = RW0_addr[9];
+  reg  RW0_addr_sel_reg;
   wire [31:0] RW0_rdata_0_0 = mem_0_0_dout0;
   wire [31:0] RW0_rdata_0 = RW0_rdata_0_0;
   wire [31:0] RW0_rdata_1_0 = mem_1_0_dout0;
   wire [31:0] RW0_rdata_1 = RW0_rdata_1_0;
-  wire [31:0] RW0_rdata_2_0 = mem_2_0_dout0;
-  wire [31:0] RW0_rdata_2 = RW0_rdata_2_0;
-  wire [31:0] RW0_rdata_3_0 = mem_3_0_dout0;
-  wire [31:0] RW0_rdata_3 = RW0_rdata_3_0;
-  wire  _GEN_0 = RW0_addr_sel == 2'h0;
-  wire  _GEN_1 = RW0_en & RW0_addr_sel == 2'h0;
-  wire  _GEN_2 = RW0_addr_sel == 2'h0;
-  wire  _GEN_3 = RW0_wmode & RW0_addr_sel == 2'h0;
-  wire  _GEN_4 = RW0_addr_sel == 2'h1;
-  wire  _GEN_5 = RW0_en & RW0_addr_sel == 2'h1;
-  wire  _GEN_6 = RW0_addr_sel == 2'h1;
-  wire  _GEN_7 = RW0_wmode & RW0_addr_sel == 2'h1;
-  wire  _GEN_8 = RW0_addr_sel == 2'h2;
-  wire  _GEN_9 = RW0_en & RW0_addr_sel == 2'h2;
-  wire  _GEN_10 = RW0_addr_sel == 2'h2;
-  wire  _GEN_11 = RW0_wmode & RW0_addr_sel == 2'h2;
-  wire  _GEN_12 = RW0_addr_sel == 2'h3;
-  wire  _GEN_13 = RW0_en & RW0_addr_sel == 2'h3;
-  wire  _GEN_14 = RW0_addr_sel == 2'h3;
-  wire  _GEN_15 = RW0_wmode & RW0_addr_sel == 2'h3;
+  wire  _GEN_0 = ~RW0_addr_sel;
+  wire  _GEN_1 = RW0_en & ~RW0_addr_sel;
+  wire  _GEN_2 = ~RW0_addr_sel;
+  wire  _GEN_3 = RW0_wmode & ~RW0_addr_sel;
+  wire  _GEN_4 = RW0_en & RW0_addr_sel;
+  wire  _GEN_5 = RW0_wmode & RW0_addr_sel;
   sky130_sram_2kbyte_1rw1r_32x512_8 mem_0_0 (
     .addr0(mem_0_0_addr0),
     .clk0(mem_0_0_clk0),
@@ -250,37 +216,12 @@ module imem_ext(
     .csb1(mem_1_0_csb1),
     .addr1(mem_1_0_addr1)
   );
-  sky130_sram_2kbyte_1rw1r_32x512_8 mem_2_0 (
-    .addr0(mem_2_0_addr0),
-    .clk0(mem_2_0_clk0),
-    .din0(mem_2_0_din0),
-    .dout0(mem_2_0_dout0),
-    .csb0(mem_2_0_csb0),
-    .web0(mem_2_0_web0),
-    .wmask0(mem_2_0_wmask0),
-    .clk1(mem_2_0_clk1),
-    .csb1(mem_2_0_csb1),
-    .addr1(mem_2_0_addr1)
-  );
-  sky130_sram_2kbyte_1rw1r_32x512_8 mem_3_0 (
-    .addr0(mem_3_0_addr0),
-    .clk0(mem_3_0_clk0),
-    .din0(mem_3_0_din0),
-    .dout0(mem_3_0_dout0),
-    .csb0(mem_3_0_csb0),
-    .web0(mem_3_0_web0),
-    .wmask0(mem_3_0_wmask0),
-    .clk1(mem_3_0_clk1),
-    .csb1(mem_3_0_csb1),
-    .addr1(mem_3_0_addr1)
-  );
-  assign RW0_rdata = RW0_addr_sel_reg == 2'h0 ? RW0_rdata_0_0 : RW0_addr_sel_reg == 2'h1 ? RW0_rdata_1_0 :
-    RW0_addr_sel_reg == 2'h2 ? RW0_rdata_2_0 : RW0_addr_sel_reg == 2'h3 ? RW0_rdata_3_0 : 32'h0;
+  assign RW0_rdata = ~RW0_addr_sel_reg ? RW0_rdata_0_0 : RW0_addr_sel_reg ? RW0_rdata_1_0 : 32'h0;
   assign mem_0_0_addr0 = RW0_addr[8:0];
   assign mem_0_0_clk0 = RW0_clk;
   assign mem_0_0_din0 = RW0_wdata;
-  assign mem_0_0_csb0 = ~(RW0_en & RW0_addr_sel == 2'h0);
-  assign mem_0_0_web0 = ~(RW0_wmode & RW0_addr_sel == 2'h0);
+  assign mem_0_0_csb0 = ~(RW0_en & ~RW0_addr_sel);
+  assign mem_0_0_web0 = ~(RW0_wmode & ~RW0_addr_sel);
   assign mem_0_0_wmask0 = 4'hf;
   assign mem_0_0_clk1 = 1'h0;
   assign mem_0_0_csb1 = 1'h0;
@@ -288,30 +229,12 @@ module imem_ext(
   assign mem_1_0_addr0 = RW0_addr[8:0];
   assign mem_1_0_clk0 = RW0_clk;
   assign mem_1_0_din0 = RW0_wdata;
-  assign mem_1_0_csb0 = ~(RW0_en & RW0_addr_sel == 2'h1);
-  assign mem_1_0_web0 = ~(RW0_wmode & RW0_addr_sel == 2'h1);
+  assign mem_1_0_csb0 = ~(RW0_en & RW0_addr_sel);
+  assign mem_1_0_web0 = ~(RW0_wmode & RW0_addr_sel);
   assign mem_1_0_wmask0 = 4'hf;
   assign mem_1_0_clk1 = 1'h0;
   assign mem_1_0_csb1 = 1'h0;
   assign mem_1_0_addr1 = 9'h0;
-  assign mem_2_0_addr0 = RW0_addr[8:0];
-  assign mem_2_0_clk0 = RW0_clk;
-  assign mem_2_0_din0 = RW0_wdata;
-  assign mem_2_0_csb0 = ~(RW0_en & RW0_addr_sel == 2'h2);
-  assign mem_2_0_web0 = ~(RW0_wmode & RW0_addr_sel == 2'h2);
-  assign mem_2_0_wmask0 = 4'hf;
-  assign mem_2_0_clk1 = 1'h0;
-  assign mem_2_0_csb1 = 1'h0;
-  assign mem_2_0_addr1 = 9'h0;
-  assign mem_3_0_addr0 = RW0_addr[8:0];
-  assign mem_3_0_clk0 = RW0_clk;
-  assign mem_3_0_din0 = RW0_wdata;
-  assign mem_3_0_csb0 = ~(RW0_en & RW0_addr_sel == 2'h3);
-  assign mem_3_0_web0 = ~(RW0_wmode & RW0_addr_sel == 2'h3);
-  assign mem_3_0_wmask0 = 4'hf;
-  assign mem_3_0_clk1 = 1'h0;
-  assign mem_3_0_csb1 = 1'h0;
-  assign mem_3_0_addr1 = 9'h0;
   always @(posedge RW0_clk) begin
     if (RW0_en) begin
       RW0_addr_sel_reg <= RW0_addr_sel;
@@ -354,7 +277,7 @@ initial begin
     `endif
 `ifdef RANDOMIZE_REG_INIT
   _RAND_0 = {1{`RANDOM}};
-  RW0_addr_sel_reg = _RAND_0[1:0];
+  RW0_addr_sel_reg = _RAND_0[0:0];
 `endif // RANDOMIZE_REG_INIT
   `endif // RANDOMIZE
 end // initial
@@ -364,13 +287,13 @@ end // initial
 `endif // SYNTHESIS
 endmodule
 module imem(
-  input  [10:0] RW0_addr,
+  input  [9:0]  RW0_addr,
   input         RW0_clk,
   input         RW0_wmode,
   input  [31:0] RW0_wdata,
   output [31:0] RW0_rdata
 );
-  wire [10:0] imem_ext_RW0_addr;
+  wire [9:0] imem_ext_RW0_addr;
   wire  imem_ext_RW0_en;
   wire  imem_ext_RW0_clk;
   wire  imem_ext_RW0_wmode;
@@ -446,7 +369,7 @@ module IMem(
   input  [31:0] io_imem_wdata,
   input         io_wr_en
 );
-  wire [10:0] imem_RW0_addr; // @[memory.scala 32:25]
+  wire [9:0] imem_RW0_addr; // @[memory.scala 32:25]
   wire  imem_RW0_clk; // @[memory.scala 32:25]
   wire  imem_RW0_wmode; // @[memory.scala 32:25]
   wire [31:0] imem_RW0_wdata; // @[memory.scala 32:25]
@@ -460,7 +383,7 @@ module IMem(
     .RW0_rdata(imem_RW0_rdata)
   );
   assign io_imem_rdata = imem_RW0_rdata; // @[memory.scala 41:17]
-  assign imem_RW0_addr = inst_address[10:0]; // @[memory.scala 38:9]
+  assign imem_RW0_addr = inst_address[9:0]; // @[memory.scala 38:9]
   assign imem_RW0_wmode = io_wr_en; // @[memory.scala 37:19 32:25 38:9]
   assign imem_RW0_clk = clock; // @[memory.scala 37:19 38:9]
   assign imem_RW0_wdata = io_imem_wdata; // @[memory.scala 37:19 38:24]
